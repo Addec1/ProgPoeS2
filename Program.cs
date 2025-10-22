@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
-// 32-byte key (64 hex) from config or fallback
+
 var keyHex = builder.Configuration["Encryption:Key"]
     ?? "A1B2C3D4E5F60718293A4B5C6D7E8F90A1B2C3D4E5F60718293A4B5C6D7E8F90";
 

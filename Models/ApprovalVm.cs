@@ -2,10 +2,7 @@
 
 namespace CMCS.Prototype.Models
 {
-    /// <summary>
-    /// Minimal approval record used by views to display actions taken.
-    /// Matches view expectations: Status, LecturerName, Stage, Notes, etc.
-    /// </summary>
+    
     public class ApprovalVm
     {
         public Guid ApprovalId { get; set; } = Guid.NewGuid();
