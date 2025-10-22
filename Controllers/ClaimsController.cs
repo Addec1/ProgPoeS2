@@ -11,20 +11,16 @@ namespace CMCS.Prototype.Controllers
 
         public IActionResult Index()
         {
+            // NOTE: If you still want "My Claims" filtered to a single user,
+            // this line keeps it filtered to ClaimStore.CurrentLecturer.
+            // If you want to see all claims regardless of name, replace this
+            // with: var mine = ClaimStore.Claims.OrderByDescending(...).ToList();
             var mine = ClaimStore.Claims
                 .Where(c => c.LecturerName == ClaimStore.CurrentLecturer)
                 .OrderByDescending(c => c.Year).ThenByDescending(c => c.Month)
                 .ToList();
-            return View(mine);
-        }
 
-        [HttpGet]
-        public async Task<IActionResult> Details(Guid id, CancellationToken ct)
-        {
-            var claim = ClaimStore.Find(id);
-            if (claim is null) return NotFound();
-            ViewBag.Files = await _store.ListAsync(id, ct);
-            return View(claim);
+            return View(mine);
         }
 
         [HttpGet]
@@ -33,11 +29,13 @@ namespace CMCS.Prototype.Controllers
             var vm = new ClaimVm
             {
                 ClaimId = Guid.NewGuid(),
-                LecturerName = ClaimStore.CurrentLecturer,
+                // Make the name editable by NOT setting it to CurrentLecturer here.
+                // Optionally prefill a placeholder-like value:
+                LecturerName = string.Empty,
                 Month = DateTime.Now.Month,
                 Year = DateTime.Now.Year,
                 HourlyRate = 400,
-                Entries = new List<ClaimEntryVm> { new() }
+                Entries = new List<ClaimEntryVm> { new() { Date = DateOnly.FromDateTime(DateTime.Today) } }
             };
             return View(vm);
         }
@@ -46,38 +44,36 @@ namespace CMCS.Prototype.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ClaimVm vm, List<IFormFile> files, CancellationToken ct)
         {
-            // Basic validation for entries
+            // Basic model checks
+            if (string.IsNullOrWhiteSpace(vm.LecturerName))
+                ModelState.AddModelError(nameof(vm.LecturerName), "Lecturer name is required.");
+
+            // Normalize/validate entries
             vm.Entries ??= new List<ClaimEntryVm>();
             vm.Entries = vm.Entries
                 .Where(e => e is not null && e.Hours > 0 && !string.IsNullOrWhiteSpace(e.Description))
                 .ToList();
 
             if (!vm.Entries.Any())
-            {
                 ModelState.AddModelError("", "Add at least one entry with hours and description.");
-                return View(vm);
-            }
 
-            // 🔒 Server-side file guards (types + size)
+            // Server-side file guards
             var allowed = new[] { ".pdf", ".docx", ".xlsx" };
             foreach (var f in files.Where(f => f?.Length > 0))
             {
                 var ext = Path.GetExtension(f.FileName).ToLowerInvariant();
                 if (!allowed.Contains(ext))
-                {
                     ModelState.AddModelError("", "Only PDF, DOCX, or XLSX files are allowed.");
-                    return View(vm);
-                }
-                if (f.Length > 10 * 1024 * 1024) // 10 MB
-                {
+                if (f.Length > 10 * 1024 * 1024)
                     ModelState.AddModelError("", "Each file must be 10 MB or smaller.");
-                    return View(vm);
-                }
             }
 
-            // Finalize claim
+            if (!ModelState.IsValid)
+                return View(vm);
+
+            // Finalize claim WITHOUT forcing the name
             vm.ClaimId = vm.ClaimId == Guid.Empty ? Guid.NewGuid() : vm.ClaimId;
-            vm.LecturerName = ClaimStore.CurrentLecturer;
+            vm.CreatedOn = DateTime.UtcNow;
             vm.TotalHours = vm.Entries.Sum(e => e.Hours);
             vm.Status = ClaimStatus.Submitted;
 

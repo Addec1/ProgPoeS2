@@ -1,37 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CMCS.Prototype.Models
 {
-    public sealed class ClaimVm
+    public class ClaimVm
     {
         public Guid ClaimId { get; set; }
-        public string LecturerName { get; set; } = "";
+
+        // Lecturer submitting this claim
+        public string LecturerName { get; set; } = string.Empty;
+
+        // Period
         public int Month { get; set; }
         public int Year { get; set; }
+
+        // When the claim was created (used in views / sorting)
+        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
+
+        // Optional notes / comments (some views reference this)
+        public string? Notes { get; set; }
+
+        // Rate & totals
         public decimal HourlyRate { get; set; }
         public decimal TotalHours { get; set; }
+
+        // Computed
         public decimal TotalAmount => Math.Round(TotalHours * HourlyRate, 2);
+
+        // Workflow
         public ClaimStatus Status { get; set; } = ClaimStatus.Draft;
+
+        // Line items
         public List<ClaimEntryVm> Entries { get; set; } = new();
-    }
-
-  
-
-    public sealed class DocumentVm
-    {
-        public string FileName { get; set; } = "";
-        public int SizeKb { get; set; }
-        public DateTime UploadedOn { get; set; }
-    }
-
-    public sealed class ApprovalVm
-    {
-        public Guid ClaimId { get; set; }
-        public string LecturerName { get; set; } = "";
-        public ApprovalStage Stage { get; set; }
-        public ClaimStatus Status { get; set; }
-        public DateTime SubmittedOn { get; set; }
-        public string? Comments { get; set; }
     }
 }

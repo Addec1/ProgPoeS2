@@ -32,9 +32,6 @@ C:\Users\lab_services_student\Desktop\Prog1Changes\CMCS.Prototype\obj\Debug\net8
 C:\Users\lab_services_student\Desktop\Prog1Changes\CMCS.Prototype\obj\Debug\net8.0\CMCS.Prototype.pdb
 C:\Users\lab_services_student\Desktop\Prog1Changes\CMCS.Prototype\obj\Debug\net8.0\CMCS.Prototype.genruntimeconfig.cache
 C:\Users\lab_services_student\Desktop\Prog1Changes\CMCS.Prototype\obj\Debug\net8.0\ref\CMCS.Prototype.dll
-C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\CMCS.Prototype.dll
-C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\refint\CMCS.Prototype.dll
-C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\CMCS.Prototype.pdb
 C:\Users\lab_services_student\source\repos\CMCS.Prototype\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\lab_services_student\source\repos\CMCS.Prototype\bin\Debug\net8.0\appsettings.json
 C:\Users\lab_services_student\source\repos\CMCS.Prototype\bin\Debug\net8.0\CMCS.Prototype.staticwebassets.runtime.json
@@ -52,6 +49,7 @@ C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\CMCS.
 C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\CMCS.Prototype.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\CMCS.Prototype.RazorAssemblyInfo.cache
 C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\CMCS.Prototype.RazorAssemblyInfo.cs
+C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\CMCS.Prototype.sourcelink.json
 C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
@@ -63,6 +61,8 @@ C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\stati
 C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\CMCS.Prototype.dll
+C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\refint\CMCS.Prototype.dll
+C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\CMCS.Prototype.pdb
 C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\CMCS.Prototype.genruntimeconfig.cache
 C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\ref\CMCS.Prototype.dll
-C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\CMCS.Prototype.sourcelink.json
