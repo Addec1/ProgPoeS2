@@ -1,6 +1,34 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
+﻿Privacy Policy
 
-<p>Use this page to detail your site's privacy policy.</p>
+Purpose
+
+This system prototype, Contract Monthly Claim System (CMCS), was developed solely for academic use under the PROG6212 Portfolio of Evidence. The application demonstrates core ASP.NET MVC and Azure functionality, including file storage, encryption, and secure data management.
+
+Data Collection
+
+The system does not collect or transmit any real personal or institutional data. All user information, lecturer names, and claim details used within the system are sample or placeholder data for demonstration purposes only.
+
+Uploaded Documents
+
+Documents uploaded to the system (e.g., claim attachments) are stored locally and encrypted using AES encryption within the application’s App_Data directory. These files are not shared, transmitted, or stored externally.
+
+Security and Encryption
+
+CMCS demonstrates best practices for secure file handling:
+Files are encrypted at rest using AES symmetric encryption.
+	•	Data is accessed only through authenticated endpoints.
+	•	No real production connection strings or API keys are included in this prototype.
+
+Data Retention
+
+All data within this system exists only in-memory or local file storage during testing. When the application stops running, data may be cleared automatically. No long-term storage or tracking mechanisms exist.
+
+User Responsibility
+
+Users of this prototype are responsible for ensuring that:
+	•	No real student, lecturer, or institutional data is uploaded.
+	•	No confidential or copyrighted material is used.
+
+Disclaimer
+
+This system is a non-production prototype built for educational assessment. It is not affiliated with, endorsed by, or used by any real academic institution or employer. The developers assume no liability for misuse beyond the intended academic demonstration.
