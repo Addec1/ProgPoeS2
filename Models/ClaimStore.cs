@@ -50,3 +50,4 @@ namespace CMCS.Prototype.Models
         public static ClaimVm? Find(Guid id) => Claims.FirstOrDefault(c => c.ClaimId == id);
     }
 }
+//
