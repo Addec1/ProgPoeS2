@@ -1,0 +1,70 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using TodoMvc.Models;
+
+namespace TodoMvc.Controllers
+{
+    public class HomeController : Controller
+    {
+        // 🔸 Simple in-memory store for phase 1
+        private static readonly List<ToDoItem>
+    _items = new();
+    private static int _nextId = 1;
+
+    [HttpGet]
+    public IActionResult Index()
+    {
+    var model = _items
+    .OrderBy(i => i.IsDone)               // incomplete first
+    .ThenByDescending(i => i.CreatedAt)   // newest first
+    .ToList();
+
+    return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Add(string title)
+    {
+    if (string.IsNullOrWhiteSpace(title))
+    {
+    TempData["Error"] = "Please enter a task.";
+    return RedirectToAction(nameof(Index));
+    }
+
+    _items.Add(new ToDoItem
+    {
+    Id = _nextId++,
+    Title = title.Trim()
+    });
+
+    return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Toggle(int id)
+    {
+    var item = _items.FirstOrDefault(i => i.Id == id);
+    if (item != null)
+    {
+    item.IsDone = !item.IsDone;
+    }
+    return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult Delete(int id)
+    {
+    var item = _items.FirstOrDefault(i => i.Id == id);
+    if (item != null)
+    {
+    _items.Remove(item);
+    }
+    return RedirectToAction(nameof(Index));
+    }
+    }
+    }

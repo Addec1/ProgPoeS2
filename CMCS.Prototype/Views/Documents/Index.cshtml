@@ -1,0 +1,28 @@
+﻿@model IEnumerable<CMCS.Prototype.Models.DocumentVm>
+@{
+    ViewData["Title"] = "Documents";
+}
+<h1 class="h4 mb-3">Supporting Documents</h1>
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead class="table-light">
+                <tr><th>File</th><th>Size (KB)</th><th>Uploaded</th><th></th></tr>
+            </thead>
+            <tbody>
+                @foreach (var d in Model)
+                {
+                    <tr>
+                        <td>@d.FileName</td>
+                        <td>@d.SizeKb</td>
+                        <td>@d.UploadedOn.ToShortDateString()</td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-secondary" href="#">Preview</a>
+                            <button class="btn btn-sm btn-outline-danger" disabled>Remove</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

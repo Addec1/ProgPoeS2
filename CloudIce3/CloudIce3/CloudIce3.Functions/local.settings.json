@@ -1,0 +1,12 @@
+﻿{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+        "StorageConnection": "UseDevelopmentStorage=true",
+        "JWT:Issuer": "https://cloudice3.local",
+        "JWT:Audience": "cloudice3-client",
+        "JWT:Key": "REPLACE_WITH_A_32+_CHAR_RANDOM_SECRET_KEY",
+        "Blob:Connection": "UseDevelopmentStorage=true",
+        "Blob:Container": "profile-images"
+    }
+}

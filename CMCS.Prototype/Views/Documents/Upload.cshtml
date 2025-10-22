@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Upload Document";
+}
+<h1 class="h4 mb-3">Upload Supporting Document</h1>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div class="mb-3">
+            <label class="form-label">Select Claim</label>
+            <select class="form-select">
+                <option>Claim #1 - Ayesha Khan (Oct)</option>
+                <option>Claim #2 - Daniel Peters (Oct)</option>
+                <option>Claim #3 - Linda Jacobs (Sep)</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Choose file (PDF)</label>
+            <input type="file" class="form-control" />
+            <div class="form-text">Max 10 MB · PDF only · (Prototype – no upload occurs)</div>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button class="btn btn-primary" disabled>Upload</button>
+            <button class="btn btn-outline-secondary" disabled>Cancel</button>
+        </div>
+    </div>
+</div>

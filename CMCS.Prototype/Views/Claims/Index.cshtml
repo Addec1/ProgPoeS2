@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CMCS.Prototype.Models.ClaimVm>
+@using CMCS.Prototype.Models
+
+@{
+    ViewData["Title"] = "My Claims";
+
+    string Badge(ClaimStatus s) => s switch
+    {
+        ClaimStatus.Draft => "secondary",
+        ClaimStatus.Submitted => "info",
+        ClaimStatus.Verified => "warning",
+        ClaimStatus.Approved => "success",
+        _ => "danger"
+    };
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h4 mb-0">My Claims</h1>
+    <a class="btn btn-primary" asp-action="Create">New Claim</a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="table-responsive p-3">
+        <div class="d-flex flex-wrap gap-2 align-items-center mb-2">
+            <div class="small text-body-secondary">
+                Legend:
+                <span class="badge bg-secondary">Draft</span>
+                <span class="badge bg-info">Submitted</span>
+                <span class="badge bg-warning">Verified</span>
+                <span class="badge bg-success">Approved</span>
+                <span class="badge bg-danger">Rejected</span>
+            </div>
+        </div>
+
+        <table class="table table-sm align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Lecturer</th>
+                    <th>Period</th>
+                    <th class="text-end">Total Hours</th>
+                    <th class="text-end">Total Amount (R)</th>
+                    <th>Status</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model)
+                {
+                    <tr>
+                        <td>@c.LecturerName</td>
+                        <td>@c.Month/@c.Year</td>
+                        <td class="text-end">@($"{c.TotalHours:N2}")</td>
+                        <td class="text-end">R @($"{c.TotalAmount:N2}")</td>
+                        <td><span class="badge bg-@Badge(c.Status)">@c.Status</span></td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@c.ClaimId">View</a>
+                            <button class="btn btn-sm btn-outline-primary" disabled title="Prototype only">Submit</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

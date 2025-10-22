@@ -1,0 +1,20 @@
+﻿@model CMCS.Prototype.Models.ApprovalVm
+@{
+    ViewData["Title"] = "Approval Details";
+}
+<h1 class="h5 mb-3">Approval Details</h1>
+<div class="card shadow-sm">
+    <div class="card-body">
+        <div class="row mb-2">
+            <div class="col-md"><strong>Lecturer:</strong> @Model.LecturerName</div>
+            <div class="col-md"><strong>Stage:</strong> @Model.Stage</div>
+            <div class="col-md"><strong>Status:</strong> @Model.Status</div>
+        </div>
+        <label class="form-label">Coordinator/Manager Comments</label>
+        <textarea class="form-control mb-3" rows="3" placeholder="Add comments (disabled in prototype)"></textarea>
+        <div class="d-flex gap-2">
+            <button class="btn btn-success" disabled>Approve</button>
+            <button class="btn btn-danger" disabled>Reject</button>
+        </div>
+    </div>
+</div>

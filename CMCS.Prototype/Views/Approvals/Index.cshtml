@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CMCS.Prototype.Models.ClaimVm>
+@{
+    ViewData["Title"] = "Approvals";
+    string Badge(CMCS.Prototype.Models.ClaimStatus s) => s switch
+    {
+        CMCS.Prototype.Models.ClaimStatus.Draft => "secondary",
+        CMCS.Prototype.Models.ClaimStatus.Submitted => "info",
+        CMCS.Prototype.Models.ClaimStatus.Verified => "warning",
+        CMCS.Prototype.Models.ClaimStatus.Approved => "success",
+        _ => "danger"
+    };
+}
+<h2>Approvals</h2>
+@if (TempData["Message"] is string m)
+{
+    <div class="alert alert-success">@m</div>
+}
+
+<table class="table align-middle">
+    <thead class="table-light">
+        <tr><th>Lecturer</th><th>Period</th><th>Total (R)</th><th>Status</th><th class="text-end"></th></tr>
+    </thead>
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.LecturerName</td>
+                <td>@c.Month/@c.Year</td>
+                <td>@(c.TotalHours* c.HourlyRate)</td>
+                <td><span class="badge bg-@Badge(c.Status)">@c.Status</span></td>
+                <td class="text-end">
+                    <form asp-action="Verify" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@c.ClaimId" />
+                        <button class="btn btn-sm btn-outline-warning" @(c.Status == CMCS.Prototype.Models.ClaimStatus.Submitted ? "" : "disabled")>Verify</button>
+                    </form>
+                    <form asp-action="Approve" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@c.ClaimId" />
+                        <button class="btn btn-sm btn-outline-success" @(c.Status == CMCS.Prototype.Models.ClaimStatus.Verified ? "" : "disabled")>Approve</button>
+                    </form>
+                    <form asp-action="Reject" method="post" class="d-inline">
+                        <input type="hidden" name="id" value="@c.ClaimId" />
+                        <button class="btn btn-sm btn-outline-danger" @(c.Status == CMCS.Prototype.Models.ClaimStatus.Approved ? "disabled" : "")>Reject</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

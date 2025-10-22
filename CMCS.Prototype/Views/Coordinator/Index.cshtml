@@ -1,0 +1,89 @@
+﻿@model IEnumerable<CMCS.Prototype.Models.ClaimVm>
+@using CMCS.Prototype.Models
+@using CMCS.Prototype.Services
+
+@{
+    ViewData["Title"] = "Programme Coordinator";
+    var files = (IDictionary<Guid, IReadOnlyList<StoredFile>>)(ViewBag.Files ?? new Dictionary<Guid, IReadOnlyList<StoredFile>>());
+    string Badge(ClaimStatus s) => s switch
+    {
+        ClaimStatus.Draft => "secondary",
+        ClaimStatus.Submitted => "info",
+        ClaimStatus.Verified => "warning",
+        ClaimStatus.Approved => "success",
+        _ => "danger"
+    };
+}
+
+<h1 class="h4 mb-3">Programme Coordinator — Pending (Submitted)</h1>
+@if (TempData["Message"] is string m)
+{
+    <div class="alert alert-success">@m</div>
+}
+
+<div class="small text-body-secondary mb-2">
+    Legend:
+    <span class="badge bg-info">Submitted</span>
+    <span class="badge bg-warning">Verified</span>
+    <span class="badge bg-success">Approved</span>
+    <span class="badge bg-danger">Rejected</span>
+</div>
+
+<div class="card shadow-sm">
+    <div class="table-responsive">
+        <table class="table table-sm table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Lecturer</th>
+                    <th>Period</th>
+                    <th class="text-end">Total Hours</th>
+                    <th class="text-end">Total Amount (R)</th>
+                    <th>Status</th>
+                    <th>Documents</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model)
+                {
+                    var docs = files.ContainsKey(c.ClaimId) ? files[c.ClaimId] : Array.Empty<StoredFile>();
+                    <tr>
+                        <td>@c.LecturerName</td>
+                        <td>@c.Month/@c.Year</td>
+                        <td class="text-end">@($"{c.TotalHours:N2}")</td>
+                        <td class="text-end">R @($"{(c.TotalHours * c.HourlyRate):N2}")</td>
+                        <td><span class="badge bg-@Badge(c.Status)">@c.Status</span></td>
+                        <td>
+                            @if (docs.Count == 0)
+                            {
+                                <span class="text-body-secondary">None</span>
+                            }
+                            else
+                            {
+                                <div class="d-flex flex-wrap gap-2">
+                                    @foreach (var f in docs)
+                                    {
+                                        <a class="btn btn-sm btn-outline-secondary" href="/documents/download/@f.DocumentId" title="Download">@f.OriginalName</a>
+                                    }
+                                </div>
+                            }
+                        </td>
+                        <td class="text-end">
+                            <form asp-action="Verify" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@c.ClaimId" />
+                                <button class="btn btn-sm btn-success" @(c.Status == ClaimStatus.Submitted ? null : "disabled")>Verify</button>
+                            </form>
+                            <form asp-action="Reject" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@c.ClaimId" />
+                                <button class="btn btn-sm btn-danger" @(c.Status is ClaimStatus.Submitted or ClaimStatus.Verified ? null : "disabled")>Reject</button>
+                            </form>
+                            <a class="btn btn-sm btn-outline-secondary" asp-controller="Claims" asp-action="Details" asp-route-id="@c.ClaimId">View</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
