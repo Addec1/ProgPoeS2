@@ -88,3 +88,7 @@ namespace CMCS.Prototype.Services
                 _meta.Files.Where(f => f.ClaimId == claimId).OrderByDescending(f => f.UploadedOn).ToList());
     }
 }
+
+// Reference: Microsoft Learn (2024) Aes Class – Symmetric Encryption Example.
+// Available at: https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.aes
+// Used to implement AES encryption and decryption for file storage functionality.

@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using CMCS.Prototype.Models;
+﻿using Microsoft.AspNetCore.Mvc;                                                           
+using CMCS.Prototype.Models;                                          
 using CMCS.Prototype.Services;
 
 namespace CMCS.Prototype.Controllers
@@ -88,3 +88,7 @@ namespace CMCS.Prototype.Controllers
         }
     }
 }
+
+// Reference: Microsoft Learn (2024) ASP.NET Core MVC controllers and routing documentation.
+// Available at: https://learn.microsoft.com/en-us/aspnet/core/mvc/controllers/actions
+// Used to guide the structure of controller actions and the use of IActionResult patterns.

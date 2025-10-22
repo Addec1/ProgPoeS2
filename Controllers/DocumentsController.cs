@@ -20,3 +20,7 @@ namespace CMCS.Prototype.Controllers
         }
     }
 }
+
+// Reference: Microsoft Learn (2023) C# Properties and expression-bodied members.
+// Available at: https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/properties
+// Assisted in defining calculated properties such as TotalAmount.

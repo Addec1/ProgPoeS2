@@ -32,3 +32,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+// Reference: Microsoft Learn (2024) Dependency Injection in ASP.NET Core.
+// Available at: https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection
+// Assisted in configuring services (IFileStore, encryption service) in Program.cs.
