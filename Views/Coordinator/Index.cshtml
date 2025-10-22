@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<CMCS.Prototype.Models.ClaimVm>
 @using CMCS.Prototype.Models
 @using CMCS.Prototype.Services
-
 @{
     ViewData["Title"] = "Programme Coordinator";
     var files = (IDictionary<Guid, IReadOnlyList<StoredFile>>)(ViewBag.Files ?? new Dictionary<Guid, IReadOnlyList<StoredFile>>());
@@ -14,21 +13,17 @@
         _ => "danger"
     };
 }
-
 <h1 class="h4 mb-3">Programme Coordinator — Pending (Submitted)</h1>
 @if (TempData["Message"] is string m)
 {
     <div class="alert alert-success">@m</div>
 }
-
 <div class="small text-body-secondary mb-2">
-    Legend:
-    <span class="badge bg-info">Submitted</span>
+    Legend: <span class="badge bg-info">Submitted</span>
     <span class="badge bg-warning">Verified</span>
     <span class="badge bg-success">Approved</span>
     <span class="badge bg-danger">Rejected</span>
 </div>
-
 <div class="card shadow-sm">
     <div class="table-responsive">
         <table class="table table-sm table-hover align-middle mb-0">
@@ -63,7 +58,7 @@
                                 <div class="d-flex flex-wrap gap-2">
                                     @foreach (var f in docs)
                                     {
-                                        <a class="btn btn-sm btn-outline-secondary" href="/documents/download/@f.DocumentId" title="Download">@f.OriginalName</a>
+                                        <a class="btn btn-sm btn-outline-secondary" href="/documents/download/@f.DocumentId">@f.OriginalName</a>
                                     }
                                 </div>
                             }
