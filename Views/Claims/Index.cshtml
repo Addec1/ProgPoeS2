@@ -15,6 +15,7 @@
     <h1 class="h4 mb-0">My Claims</h1>
     <a class="btn btn-primary" asp-action="Create">New Claim</a>
 </div>
+
 <div class="card shadow-sm">
     <div class="table-responsive p-3">
         <div class="small text-body-secondary mb-2">
@@ -43,11 +44,11 @@
                         <td>@c.LecturerName</td>
                         <td>@c.Month/@c.Year</td>
                         <td class="text-end">@($"{c.TotalHours:N2}")</td>
+                        <!-- ✅ Use computed property -->
                         <td class="text-end">R @($"{c.TotalAmount:N2}")</td>
                         <td><span class="badge bg-@Badge(c.Status)">@c.Status</span></td>
                         <td class="text-end">
                             <a class="btn btn-sm btn-outline-secondary" asp-action="Details" asp-route-id="@c.ClaimId">View</a>
-                            <button class="btn btn-sm btn-outline-primary" disabled title="Prototype only">Submit</button>
                         </td>
                     </tr>
                 }
