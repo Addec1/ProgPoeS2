@@ -65,3 +65,4 @@ C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\stati
 C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\CMCS.Prototype.genruntimeconfig.cache
 C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\ref\CMCS.Prototype.dll
+C:\Users\lab_services_student\source\repos\CMCS.Prototype\obj\Debug\net8.0\CMCS.Prototype.sourcelink.json
